@@ -1,6 +1,9 @@
+const dotenv = require('dotenv');
+dotenv.config();
 const axios = require('axios')
 const uWS = require('uWebSockets.js')
-const port = 5000;
+const port = process.env.PORT || 5000
+const key = process.env.KEY
 const createNanoEvents = require('nanoevents').createNanoEvents
 const emitter = createNanoEvents()
 
@@ -43,7 +46,7 @@ const app = uWS.App({})
     /* Options */
     compression: uWS.SHARED_COMPRESSOR,
     maxPayloadLength: 16 * 1024 * 1024,
-    idleTimeout: Infinity,
+    idleTimeout: 120,
     /* Handlers */
     async upgrade(res, req, ctx) {
         res.onAborted(() => {
@@ -181,8 +184,12 @@ const app = uWS.App({})
     })
 
     readJson(res).then((obj) => {
-        emitter.emit(obj.channel, obj)
+        if (obj.key != key) {
+            return res.end(JSON.stringify({success: false, error: 'Key is not correct' }))
+        }
 
+        emitter.emit(obj.channel, obj)
+        add_to_history(obj)
         res.end('Thanks for this json!')
     });
 })
@@ -193,10 +200,11 @@ const app = uWS.App({})
     })
 
     readJson(res).then((obj) => {
-        console.log(obj)
-        SUB_STORE[obj.secret_key] = obj
-        log(`Added ${obj.secret_key}`)
+        if (obj.key != key) {
+            return res.end(JSON.stringify({success: false, error: 'Key is not correct' }))
+        }
 
+        SUB_STORE[obj.secret_key] = obj
         res.end('Thanks for this json!')
     })
 })
