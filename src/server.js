@@ -1,7 +1,7 @@
 const dotenv = require('dotenv');
 dotenv.config();
 const axios = require('axios')
-const uWS = require('uWebSockets.js')
+const uWS = require('uWebSockets.js') 
 const port = process.env.PORT || 5000
 const key = process.env.KEY
 const createNanoEvents = require('nanoevents').createNanoEvents
@@ -188,6 +188,8 @@ const app = uWS.App({})
             return res.end(JSON.stringify({success: false, error: 'Key is not correct' }))
         }
 
+        delete obj.key
+
         emitter.emit(obj.channel, obj)
         add_to_history(obj)
         res.end('Thanks for this json!')
@@ -203,6 +205,8 @@ const app = uWS.App({})
         if (obj.key != key) {
             return res.end(JSON.stringify({success: false, error: 'Key is not correct' }))
         }
+
+        delete obj.key
 
         SUB_STORE[obj.secret_key] = obj
         res.end('Thanks for this json!')
