@@ -1,0 +1,21 @@
+{
+  "name": "Polaris",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/server.js",
+  "scripts": {
+    "run": "node src/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "blessed": "^0.1.81",
+    "blessed-contrib": "^4.8.21",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "nanoevents": "^5.1.13",
+    "uWebSockets.js": "github:uNetworking/uWebSockets.js#v20.1.0"
+  }
+}
