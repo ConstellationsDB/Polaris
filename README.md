@@ -1,6 +1,6 @@
 # ⭐ Polaris: Real-time microservice
 
-This is our internal real-time messaging micro-service which allows us to transmit events with ease. 
+This is our real-time messaging microservice which allows us to transmit events with ease. 
 
 ### How does it work?
 Polaris has no built-in authorization, it relies on the API integrating with it to provide authorization. The idea is that you must submit a token to the API, then the end user can submit the same token to the WebSocket. This allows Polaris to be authorization agnostic without data being public.
@@ -13,8 +13,8 @@ Polaris has no built-in authorization, it relies on the API integrating with it 
    - WebSocket message -> `{ "action": "SUB", "token": "rtm_000000" }`
 
 ### Why?
-Existing solutions are either too complex, require us to use their authorization system, or cost too much to operate. Polaris is designed to be a simple RTM microservice, using uWS.js to enable high-speed, high-throughput messages.
+Existing solutions are either too complex, require us to use their authorization system, or cost too much to operate. Polaris is designed to be a simple RTM microservice, using uWS.js to enable high-speed, high-throughput messages. While this is a single server with no cluster or sharding capabilities, it is great for small to medium sized projects.
 
 ### Credits
 Created by Cerulean for ConstellationsDB
-![](https://s3.us-west-000.backblazeb2.com/constellationsdb/marketing/web/png/black.png)
+[![](https://s3.us-west-000.backblazeb2.com/constellationsdb/marketing/web/png/black.png)](https://constellations.tech)
