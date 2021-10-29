@@ -1,8 +1,8 @@
-const dotenv = require('dotenv');
-dotenv.config();
+// const dotenv = require('dotenv');
+// dotenv.config();
 const axios = require('axios')
 const uWS = require('uWebSockets.js') 
-const port = process.env.PORT || 5000
+const port = process.env.PORT || 5000 // by default, it will run on port 5000 however set the PORT env var and it will run there.
 const key = process.env.KEY
 const createNanoEvents = require('nanoevents').createNanoEvents
 const emitter = createNanoEvents()
@@ -213,61 +213,16 @@ const app = uWS.App({})
     })
 })
 
+.get('/', (res) => {
+    res.end('Woof')
+})
+
 .any('/*', (res, req) => {
     res.end('🚀');
 })
 
 .listen(port, (token) => {
-    if (token) {
-    } else {
-    }
+    console.log(token)
 })
 
-// http_api.use(bodyParser())
-
-// http_api.post('/v1/realtime/unsubscribe', (req, res) => {
-//     var data = req.body
-
-//     clients.forEach(client => {
-//         if (client.userID == data.user) {
-//             Object.keys(client.listeners).forEach(key => {
-//                 if (data.channels.includes(key)) {
-//                     client.unsubscribe(key)
-//                 }
-//             })
-//         }
-//     })
-
-//     res.send('Hello World!')
-// })
-
-
-// http_api.post('/v1/inbound', (req, res) => {
-//     var obj = req.body
-//     emitter.emit(obj.channel, obj)
-//     add_to_history(obj)
-
-//     res.send('Hello World!')
-// })
-
-// http_api.get('/v1/active/:eventID', (req, res) => {
-//     var obj = req.body
-//     var total = 0
-
-//     var out = new Set()
-//     clients.forEach(client => {
-//         Object.keys(client.listeners).forEach(key => {
-//             if (key == req.params.eventID) {
-//                 out.add(client.userID)
-//             }
-//         })
-//     })
-
-//     out = Array.from(out)
-
-//     res.json({value: out.length, users: out})
-// })
-
-// http_api.listen(process.env.PORT || 5001, () => {
-//     log(`HTTP API listening on port ${process.env.PORT || 5001}`)
-// })
+console.log('END')
